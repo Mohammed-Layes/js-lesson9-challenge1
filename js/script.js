@@ -49,15 +49,24 @@ const updateGuestCount = function() {
 };
 
 const assignItems = function() {
+
     let potluckItems = ["Halloumi and Melon Skewers", "Veggie Nori Rolls", "Tangy Carrot Slaw", "Pesto Pasta Salad", "Lemon Cream Icebox Cake", "Chilled Cucumber Noodles with Sesame Dressing", "3-Bean Israeli Couscous Salad", "Zucchini Noodles with Tomatoes and Corn", "Tuna Salad", "Egg Salad", "Avocado Squares", "Key Lime Pie"];
+
+    const allGuests = document.querySelectorAll(".guest-list li");
+
+    for (let guest of allGuests) {
+        const randomPotluckIndex = Math.floor(Math.random() * potluckItems.length);
+        const randomPotluckItem = potluckItems[randomPotluckIndex];
+        const listItem = document.createElement("li");
+        listItem.innerText = `${guest.innerText} is bringing ${randomPotluckItem}`;
+        assignedItems.append(listItem);
+        potluckItems.splice(randomPotluckIndex, 1);
+    }
+    
 };
 
-const allGuests = document.querySelectorAll(".guest-list li");
+assignButton.addEventListener("click", function() {
+    assignItems();
+    assignButton.disabled = true;
+});
 
-for (let guest of allGuests) {
-    const randomPotluckIndex = Math.floor(Math.random() * potluckItems.length);
-    const randomPotluckItem = potluckItems[randomPotluckIndex];
-    const listItem = document.createElement("li");
-    listItem.innerText = `${guest.innerText} is bringing ${randomPotluckItem}`;
-    assignedItems.append(listItem);
-}
